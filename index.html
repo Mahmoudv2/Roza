@@ -1,7 +1,8 @@
-<!DOCTYPE html><html lang="ar">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>رسالة رومانسية</title>
+  <title>من كارلوس</title>
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
   <style>
     body {
@@ -83,11 +84,17 @@
     .roza-header.settle {
       transform: translateY(0) rotate(0);
     }
-    @media (max-width: 600px) {
-    .envelope-container {
-    width: 300px;
-    height: 225px;
-    }
+    @media (max-width: 1280px) {
+      .envelope-container {
+        width: 320px;
+        height: 240px;
+      }
+      .poem {
+        font-size: 1.5em;
+      }
+      .roza-header {
+        font-size: 2.5em;
+      }
     }
   </style>
 </head>
@@ -99,22 +106,45 @@
       <div id="poem" class="poem"></div>
     </div>
   </div>
-  <div id="roza" class="roza-header">Roza</div>  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>  <script>
+  <div id="roza" class="roza-header">Love U Roza</div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    // متغير لتتبع انتهاء عرض الرسالة
+    let messageCompleted = false;
+    
     function openEnvelope() {
-      document.querySelector('.envelope-container').classList.add('open');
+      const container = document.querySelector('.envelope-container');
+      const poemElement = document.getElementById('poem');
+      
+      // إذا كان الظرف مفتوح بالفعل
+      if (container.classList.contains('open')) {
+        // وإذا انتهت الرسالة بالفعل
+        if (messageCompleted) {
+          poemElement.innerHTML = "خلص خلصت الرسالة حبي تطمعيش";
+        }
+        return;
+      }
+      
+      // فتح الظرف وتشغيل الرسالة
+      container.classList.add('open');
       setTimeout(() => {
         var typed = new Typed("#poem", {
           strings: [
-          "هنيئاً لكِ العيدُ الذي أنتِ عيدُهُ",
-  "وأنَّكِ من فيضِ البهاءِ تُزيدُهُ",
-  "",
-  "وإنِّي وإنْ أهداكِ غيري ورودَهُ",
-  "سأُهديكِ قلباً أنتِ فيهِ وَريدُهُ"
-],
+            "هنيئاً لكِ العيدُ الذي أنتِ عيدُهُ",
+            "وأنَّكِ من فيضِ البهاءِ تُزيدُهُ",
+            "",
+            "وإنِّي وإنْ أهداكِ غيري ورودَهُ",
+            "سأُهديكِ قلباً أنتِ فيهِ وَريدُهُ",
+            "",
+            "مبرمج وشاعر صح؟ نياهاهاها",
+            "صح نسيت أقلك"
+          ],
           typeSpeed: 80,
           backSpeed: 20,
           loop: false,
           onComplete: function() {
+            messageCompleted = true;
             let roza = document.getElementById('roza');
             roza.classList.add('fly');
             setTimeout(() => {
@@ -124,5 +154,6 @@
         });
       }, 1000);
     }
-  </script></body>
+  </script>
+</body>
 </html>
